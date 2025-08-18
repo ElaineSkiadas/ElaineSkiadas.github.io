@@ -29,7 +29,7 @@
 
     img, video, audio { width:100%; height:auto; display:block }
 
-    /* ===== A) Sticky / Overlay Header ===== */
+    /* Header */
     header.site-header{
       position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.78);
@@ -45,112 +45,58 @@
       gap:.5rem;
       padding:.6rem 1rem;
     }
-    .brand{
-      font-weight:700;
-      letter-spacing:.02em;
-      text-transform:uppercase;
-      font-size:18px;
-      color:var(--brand);
-      text-align:center;
-    }
-    nav.primary{ display:flex; gap:.25rem; flex-wrap:wrap }
-    nav.primary a{
-      text-decoration:none; color:inherit;
-      padding:.35rem .6rem; border-radius:.5rem;
-    }
-    nav.primary a:hover, nav.primary a:focus{
-      background:rgba(0,0,0,.06); outline:0;
-    }
+    .brand{ font-weight:700; letter-spacing:.02em; text-transform:uppercase; font-size:18px; color:var(--brand); text-align:center; }
+    nav.primary{ display:flex; gap:.25rem; flex-wrap:wrap; }
+    nav.primary a{ text-decoration:none; color:inherit; padding:.35rem .6rem; border-radius:.5rem; }
+    nav.primary a:hover, nav.primary a:focus{ background:rgba(0,0,0,.06); outline:0; }
 
-    /* ===== D) Mobile overlay menu ===== */
-    .menu-btn{
-      display:none;
-      background:none; border:0; padding:.5rem .65rem; border-radius:.5rem;
-      font:inherit;
-    }
+    /* Mobile overlay */
+    .menu-btn{ display:none; background:none; border:0; padding:.5rem .65rem; border-radius:.5rem; font:inherit; }
     .menu-btn:focus{ outline:2px solid #000; outline-offset:2px }
-    .overlay{
-      position:fixed; inset:0; background:rgba(255,255,255,.98);
-      display:none; padding:2rem 1.25rem; z-index:90;
-    }
+    .overlay{ position:fixed; inset:0; background:rgba(255,255,255,.98); display:none; padding:2rem 1.25rem; z-index:90; }
     .overlay.open{ display:block }
     .overlay nav{ display:grid; gap:.85rem; max-width:var(--maxw); margin:auto }
     .overlay a{ font-size:20px; text-decoration:none; color:var(--ink) }
 
-    /* ===== Landing p5 background (sketchjs2) ===== */
-    #landing{
-      position:fixed; inset:0; z-index:-1;
-      pointer-events:none;           /* canvas won’t block clicks */
-      background:#000;               /* fallback before p5 starts */
-    }
-    #landing canvas{
-      position:absolute; inset:0;
-      width:100% !important; height:100% !important;
-      display:block;
-    }
-
-    /* ===== Hero (animation shows behind this) ===== */
+    /* Hero */
     .hero{
       position:relative; min-height:85vh;
       display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden;
+      background:#000;
     }
     .hero::before{
-      content:""; position:absolute; inset:0;
-      /* gradient ONLY so the landing sketch is visible */
-      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
-      z-index:0;
+      content:""; position:absolute; inset:-12vh 0 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.55)),
+        url('Turtle.PNG') center/cover no-repeat fixed;
+      transform:translateZ(0); will-change:transform;
+      filter:brightness(.9);
     }
     .hero > *{ position:relative; z-index:1 }
     .hero h1{ font-size:clamp(36px,6vw,72px); margin:0 0 .4rem }
     .hero p{ margin:.25rem 0 1rem; color:#eaeaea }
-    .cta{
-      display:inline-block; text-decoration:none;
-      background:var(--brand); color:#fff; border-radius:.5rem;
-      padding:.75rem 1rem; font-weight:600;
-    }
+    .cta{ display:inline-block; text-decoration:none; background:var(--brand); color:#fff; border-radius:.5rem; padding:.75rem 1rem; font-weight:600; }
     .cta:focus{ outline:2px solid #fff; outline-offset:3px }
 
-    /* ===== Layout / Main ===== */
+    /* Layout */
     main{ max-width:var(--maxw); margin:auto; padding:2rem 1rem }
     h2{ font-size:clamp(22px,3vw,32px); margin:1rem 0 .5rem }
-    h1.inline-title{
-      padding:10px; border-radius:10px; border:2px solid #000; font-style:italic;
-      display:inline-block; background:#fff;
-    }
     hr{ margin:30px 0 }
 
-    /* ===== C) Right-Edge Section Index Nav ===== */
-    .section-index{
-      position:fixed; right:16px; top:50%; transform:translateY(-50%);
-      display:flex; flex-direction:column; gap:.5rem; z-index:60;
-    }
-    .section-index a{
-      display:flex; align-items:center; gap:.5rem;
-      text-decoration:none; color:var(--ink); font-size:14px;
-      background:rgba(255,255,255,.9); padding:.25rem .5rem; border-radius:.5rem;
-    }
-    .dot{ width:10px; height:10px; border-radius:50%; background:#bbb; transition:.2s }
-    .section-index a:hover .dot, .section-index a:focus .dot, .section-index a.active .dot{ background:#111 }
-    .section-index a.active{ box-shadow:0 0 0 2px rgba(0,0,0,.08) inset }
-
-    /* ===== Footer ===== */
+    /* Footer */
     footer{ padding:2rem 1rem; border-top:1px solid #eee; text-align:center; color:var(--muted) }
 
-    /* ===== Responsive ===== */
+    /* Responsive */
     @media (max-width: 860px){
       .header-inner{ grid-template-columns: auto auto auto }
       nav.primary{ display:none }
       .menu-btn{ display:inline-block; justify-self:end }
-      .section-index{ display:none } /* hide edge index on small screens */
     }
   </style>
 </head>
 
 <body>
-  <!-- Full-screen landing canvas host for sketchjs2 -->
-  <div id="landing" aria-hidden="true"></div>
-
-  <!-- ===== A) Header (sticky/overlay) ===== -->
+  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="header-inner">
       <nav class="primary" aria-label="Primary">
@@ -162,23 +108,17 @@
       </nav>
 
       <div class="brand">Elaine Skiadas</div>
+
       <button class="menu-btn" aria-expanded="false" aria-controls="menu">☰ Menu</button>
     </div>
   </header>
 
-  <!-- ===== D) Mobile overlay menu ===== -->
+  <!-- Mobile overlay (links are cloned from header in JS) -->
   <div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#bio">Bio</a>
-      <a href="#project1">Sea Turtle</a>
-      <a href="#project2">Press Fit Lantern</a>
-      <a href="#project3">Kandinsky Sketch</a>
-      <a href="#footer">Contact / Footer</a>
-    </nav>
+    <nav aria-label="Mobile"></nav>
   </div>
 
-  <!-- ===== Hero (landing animation sits behind) ===== -->
+  <!-- Hero -->
   <section id="hero" class="hero" aria-label="Hero">
     <div>
       <h1>Elaine Skiadas</h1>
@@ -187,20 +127,9 @@
     </div>
   </section>
 
-  <!-- ===== C) Right-edge section index ===== -->
-  <nav class="section-index" aria-label="Section index">
-    <a href="#hero"><span class="dot"></span><span>Home</span></a>
-    <a href="#bio"><span class="dot"></span><span>Bio</span></a>
-    <a href="#project1"><span class="dot"></span><span>Sea Turtle</span></a>
-    <a href="#project2"><span class="dot"></span><span>Lantern</span></a>
-    <a href="#project3"><span class="dot"></span><span>Sketch</span></a>
-  </nav>
-
-  <!-- ===== Main content ===== -->
+  <!-- Main -->
   <main>
-    <h1 class="inline-title">Elaine Skiadas</h1>
-
-    <!-- ===== BIO ===== -->
+    <!-- BIO -->
     <section id="bio" aria-labelledby="bio-h2">
       <h2 id="bio-h2">Bio</h2>
       <p>
@@ -214,7 +143,7 @@
 
     <hr />
 
-    <!-- ===== PROJECT 1 ===== -->
+    <!-- PROJECT 1 -->
     <section id="project1" aria-labelledby="p1-h2">
       <h2 id="p1-h2">Journey of a Sea Turtle</h2>
       <p>
@@ -229,7 +158,7 @@
 
     <hr />
 
-    <!-- ===== PROJECT 2 ===== -->
+    <!-- PROJECT 2 -->
     <section id="project2" aria-labelledby="p2-h2">
       <h2 id="p2-h2">Press Fit Lantern</h2>
       <p>
@@ -242,18 +171,13 @@
 
     <hr />
 
-    <!-- ===== PROJECT 3 ===== -->
+    <!-- PROJECT 3 -->
     <section id="project3" aria-labelledby="p3-h2">
       <h2 id="p3-h2">Kandinsky Inspired Sketch</h2>
       <p>
         This sketch was generated using ChatGPT using the following prompt:
         “Generate a p5js sketch of a Kandinsky inspired painting, include some animated elements. Javascript only.”
       </p>
-
-      <!-- Host for the Kandinsky p5 sketch -->
-      <div id="kandinsky"></div>
-
-      <!-- Your Kandinsky sketch file (ensure it parents to #kandinsky) -->
       <script src="sketch.js"></script>
     </section>
   </main>
@@ -262,14 +186,15 @@
     <p>©2025 Elaine Skiadas</p>
   </footer>
 
-  <!-- Mount the landing animation LAST so #landing exists -->
-  <script src="sketchjs2.js"></script>
-
   <script>
-    // ===== D) Mobile overlay menu toggle =====
+    // Mobile overlay menu toggle + clone links from header
     const btn = document.querySelector('.menu-btn');
     const overlay = document.getElementById('menu');
-    const overlayLinks = overlay.querySelectorAll('a');
+    const overlayNav = overlay.querySelector('nav[aria-label="Mobile"]');
+    const primaryNav = document.querySelector('nav.primary');
+
+    // Clone header links once so we don't maintain duplicates
+    overlayNav.innerHTML = primaryNav.innerHTML;
 
     function closeMenu(){
       overlay.classList.remove('open');
@@ -281,27 +206,14 @@
       btn.setAttribute('aria-expanded', open);
       (open ? overlay : btn).focus();
     });
-    overlay.addEventListener('click', e => {
-      if(e.target === overlay) closeMenu();
-    });
-    overlayLinks.forEach(a => a.addEventListener('click', closeMenu));
+    overlay.addEventListener('click', e => { if(e.target === overlay) closeMenu(); });
+    overlayNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     window.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
-
-    // ===== C) Highlight active section in right-edge index =====
-    const indexLinks = document.querySelectorAll('.section-index a');
-    const sections = [...indexLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          const id = '#' + entry.target.id;
-          indexLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-        }
-      });
-    }, { root:null, rootMargin:'-45% 0px -45% 0px', threshold:0.01 });
-
-    sections.forEach(sec => io.observe(sec));
   </script>
+
+  <!-- Landing animation -->
+  <script src="sketchjs2.js"></script>
 </body>
 </html>
+
 
