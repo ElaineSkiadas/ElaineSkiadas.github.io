@@ -83,6 +83,29 @@
     h2{ font-size:clamp(22px,3vw,32px); margin:1rem 0 .5rem }
     hr{ margin:30px 0 }
 
+    /* Kandinsky sketch: scale to 50% of its original canvas size */
+    #project3 canvas{
+      width:50% !important;
+      height:auto !important;
+      display:block;
+      margin-inline:auto;
+    }
+
+    /* Gallery */
+    #gallery .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:10px;
+    }
+    /* simple masonry-ish spans; tweak freely */
+    #gallery .gallery-grid figure{ margin:0; overflow:hidden; border-radius:10px }
+    #gallery .gallery-grid img{ display:block; width:100%; height:auto }
+    /* responsive spans */
+    #gallery .span-6{ grid-column: span 6 }
+    #gallery .span-4{ grid-column: span 4 }
+    #gallery .span-8{ grid-column: span 8 }
+    #gallery .span-12{ grid-column: span 12 }
+
     /* Footer */
     footer{ padding:2rem 1rem; border-top:1px solid #eee; text-align:center; color:var(--muted) }
 
@@ -91,6 +114,8 @@
       .header-inner{ grid-template-columns: auto auto auto }
       nav.primary{ display:none }
       .menu-btn{ display:inline-block; justify-self:end }
+      /* Gallery stacks nicely on mobile */
+      #gallery .span-6, #gallery .span-4, #gallery .span-8 { grid-column: span 12 }
     }
   </style>
 </head>
@@ -105,6 +130,7 @@
         <a href="#project1">Sea Turtle</a>
         <a href="#project2">Press Fit Lantern</a>
         <a href="#project3">Kandinsky Sketch</a>
+        <a href="#gallery">Gallery</a>
       </nav>
 
       <div class="brand">Elaine Skiadas</div>
@@ -153,7 +179,7 @@
         Educational snippets are woven throughout the game to highlight key facts and raise awareness about sea turtle
         conservation.
       </p>
-      <img src="Turtle.PNG" alt="Journey of a Sea Turtle game screenshot" />
+      <img src="Turtle.PNG" alt="Journey of a Sea Turtle game screenshot" loading="lazy"/>
     </section>
 
     <hr />
@@ -166,7 +192,7 @@
         glow that lamps bring to an indoor space, and I wanted to design something that felt both warm and organic.
         The laser-cut pattern on each press-fit component was inspired by the natural geometry of succulents.
       </p>
-      <img src="IMG_1954.jpeg" alt="Press Fit Lantern" />
+      <img src="IMG_1954.jpeg" alt="Press Fit Lantern" loading="lazy"/>
     </section>
 
     <hr />
@@ -179,6 +205,32 @@
         “Generate a p5js sketch of a Kandinsky inspired painting, include some animated elements. Javascript only.”
       </p>
       <script src="sketch.js"></script>
+    </section>
+
+    <hr />
+
+    <!-- PROJECT 4: GALLERY -->
+    <section id="gallery" aria-labelledby="gallery-h2">
+      <h2 id="gallery-h2">Gallery</h2>
+      <p>Commercial Food Photography</p>
+      <div class="gallery-grid">
+        <!-- Replace src paths with your real images -->
+        <figure class="span-6">
+          <img src="photos/photo1.jpg" alt="Food photo 1" loading="lazy">
+        </figure>
+        <figure class="span-6">
+          <img src="photos/photo2.jpg" alt="Food photo 2" loading="lazy">
+        </figure>
+        <figure class="span-4">
+          <img src="photos/photo3.jpg" alt="Food photo 3" loading="lazy">
+        </figure>
+        <figure class="span-8">
+          <img src="photos/photo4.jpg" alt="Food photo 4" loading="lazy">
+        </figure>
+        <figure class="span-12">
+          <img src="photos/photo5.jpg" alt="Food photo 5" loading="lazy">
+        </figure>
+      </div>
     </section>
   </main>
 
@@ -215,5 +267,3 @@
   <script src="sketchjs2.js"></script>
 </body>
 </html>
-
-
