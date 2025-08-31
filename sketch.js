@@ -25,7 +25,7 @@ let grainG;
 function setup() {
   randomSeed(seed);
   noiseSeed(seed);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth/2, windowHeight/2);
   angleMode(DEGREES);
   noStroke();
 
@@ -324,7 +324,7 @@ function drawConfetti() {
 // ---------- Helpers ----------
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth/2, windowHeight/2);
   grainG = createGraphics(width, height);
   grainG.noStroke();
   for (let i = 0; i < width * height * 0.015; i++) {
@@ -333,6 +333,8 @@ function windowResized() {
     const a = random(8, 22);
     grainG.fill(0, 0, 0, a);
     grainG.rect(x, y, 1, 1);
+  }
+}
   }
 }
 
